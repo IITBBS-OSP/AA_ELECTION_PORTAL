@@ -17,6 +17,7 @@ export default async function AdminLayout({
 
 
   const supabase = await getSupabaseServerClient()
+  
 
   const {
     data: { user },
@@ -72,9 +73,15 @@ export default async function AdminLayout({
             href="/admin/elections/create"
             className="flex w-full items-center justify-center rounded-md bg-sidebar-primary px-4 py-2 text-sm font-medium text-sidebar-primary-foreground hover:opacity-90 transition-opacity"
           >
-            + Create Election
+            + Create Election 
           </Link>
         </div>
+
+        
+
+
+
+
       </aside>
 
       {/* Main Content Area */}
@@ -82,3 +89,8 @@ export default async function AdminLayout({
     </div>
   )
 }
+
+
+
+
+

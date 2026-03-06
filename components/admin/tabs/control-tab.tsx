@@ -275,6 +275,27 @@ export function ControlTab({
       : "DRAFT"
   )
 
+  const HandleElectionDeletion = async () => {
+    if (userRole !== "admin") return
+    if (!confirm("Are you sure you want to close this election? This action cannot be undone.")) return
+
+    try {
+      await axios.delete("/api/admin/elections/delete", {
+        data: { electionId: election.id },
+      })
+
+      alert("Election closed successfully.")
+      window.location.href = "/admin"
+    } catch (err: any) {
+      console.error("Election deletion failed:", err)
+      alert(
+        err?.response?.data?.error ||
+          err.message ||
+          "Failed to close election"
+      )
+    }
+  }
+
   const isPhaseApprovalPending =
     pendingApproval?.action_type === "CHANGE_PHASE"
 
@@ -526,7 +547,8 @@ export function ControlTab({
         </p>
 
         <button
-          disabled={userRole === "observer" || !!pendingApproval}
+        onClick={HandleElectionDeletion}
+          disabled={userRole === "observer"}
           className="rounded-md border-2 border-destructive px-4 py-2 font-medium text-destructive hover:bg-destructive/10 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Close Election

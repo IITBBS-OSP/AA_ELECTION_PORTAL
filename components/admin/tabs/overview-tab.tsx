@@ -1275,7 +1275,7 @@ if (isEditPending && userRole === "observer") {
           <div className="rounded-lg border border-border bg-card p-6">
             <div className="mb-6 flex items-center justify-between">
               <h3 className="text-lg font-semibold text-foreground">Election Information</h3>
-              {userRole === "admin"&&election?.election.status === "DRAFT" && (
+              {userRole === "admin" && (
                 <button
                   onClick={() => {
                     setEditPositions(election?.positions || [])

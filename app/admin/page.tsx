@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useState,useEffect } from "react"
 import axios from "axios";
 import { CenteredLoader } from "@/components/ui/loader";
+import { supabase } from "@/lib/supabaseClient"
 
 
 export interface Election {
@@ -51,6 +52,11 @@ useEffect(() => {
 if(loading) {
   return <CenteredLoader />
 }
+
+const HandleLogout = async () => {
+    await supabase.auth.signOut()
+    window.location.href = "/"
+  }
 
 
 
@@ -116,12 +122,20 @@ if(loading) {
             <h1 className="text-3xl font-bold text-foreground">Admin Dashboard</h1>
             <p className="mt-2 text-muted-foreground">Manage elections and voting processes</p>
           </div>
-          <Link
+          <div className="flex gap-2">
+            <Link
             href="/admin/elections/create"
             className="rounded-md bg-primary px-6 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity"
           >
             + Create Election
           </Link>
+          <div className="rounded-md bg-primary px-6 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity">
+            <button onClick={HandleLogout}>Logout</button>
+          </div>
+
+
+          </div>
+          
         </div>
 
         {/* Recently Created Elections */}
