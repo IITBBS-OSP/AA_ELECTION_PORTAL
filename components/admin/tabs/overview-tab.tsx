@@ -1005,8 +1005,7 @@ formData.append("phases", JSON.stringify(sanitizedPhases))
     if (!pendingApproval) return
 
     await axios.post(
-      `/api/admin/approvals/${pendingApproval.id}/reject`
-    )
+      `/api/admin/approvals/reject`, {approvalRequestId: pendingApproval.id})
 
     await refetchPendingApproval()
   }

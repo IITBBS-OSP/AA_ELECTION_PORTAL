@@ -360,7 +360,7 @@ export function ControlTab({
 
     try {
       await axios.post("/api/admin/approvals/reject", {
-        electionId: election.id,
+         approvalRequestId: pendingApproval.id,
       })
 
       refetchPendingApproval()
