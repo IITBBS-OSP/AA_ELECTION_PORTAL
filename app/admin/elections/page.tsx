@@ -135,8 +135,8 @@ export default function ElectionsListPage() {
         </div>
 
         {/* Elections Table */}
-        <div className="overflow-hidden rounded-lg border border-border bg-card">
-          <table className="w-full">
+        <div className="overflow-x-auto md:overflow-hidden rounded-lg border border-border bg-card">
+          <table className="w-full min-w-max">
             <thead>
               <tr className="border-b border-border bg-secondary">
                 <th className="px-6 py-3 text-left text-sm font-semibold text-foreground">Title</th>

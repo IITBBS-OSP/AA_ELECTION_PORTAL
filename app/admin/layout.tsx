@@ -4,6 +4,7 @@ import Link from "next/link"
 import { redirect } from "next/navigation"
 import { getSupabaseServerClient } from "@/lib/supabaseServer"
 
+
 export const metadata: Metadata = {
   title: "Admin Dashboard - Alumni Voting Portal",
   description: "Manage elections and voting processes",
@@ -45,7 +46,8 @@ export default async function AdminLayout({
 
   return (
     <div className="flex h-screen bg-background">
-      <aside className="w-64 border-r border-sidebar-border bg-primary text-sidebar-foreground flex flex-col">
+      
+      <aside className=" hidden md:flex w-64 border-r border-sidebar-border bg-primary text-sidebar-foreground flex-col">
         <div>
           <div className="p-6 border-b border-sidebar-border/30">
             <h1 className="text-xl font-bold text-sidebar-foreground">Alumni Portal</h1>
@@ -69,13 +71,17 @@ export default async function AdminLayout({
         </div>
 
         <div className="border-t border-sidebar-border/30 px-4 py-6">
-          <Link
-            href="/admin/elections/create"
-            className="flex w-full items-center justify-center rounded-md bg-sidebar-primary px-4 py-2 text-sm font-medium text-sidebar-primary-foreground hover:opacity-90 transition-opacity"
-          >
-            + Create Election 
-          </Link>
+         {profile.role === 'ADMIN' && (
+            <Link
+              href="/admin/elections/create"
+              className="flex w-full items-center justify-center rounded-md bg-sidebar-primary px-4 py-2 text-sm font-medium text-sidebar-primary-foreground hover:opacity-90 transition-opacity"
+            >
+              + Create Election 
+            </Link>
+          )}
         </div>
+
+        
 
         
 
@@ -92,5 +98,4 @@ export default async function AdminLayout({
 
 
 
-
-
+ 

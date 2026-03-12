@@ -291,14 +291,35 @@ export async function POST(req: Request) {
 
     /* ---------- CASE 3: NOMINATION DECISION ---------- */
     else if (approval.action_type === "NOMINATION_DECISION") {
-      await supabaseAdmin.from("audit_logs").insert({
-        action: "REJECT_NOMINATION_DECISION",
-        entity_type: "NOMINATION",
-        entity_id: approval.payload.nomination_id,
-        performed_by: user.id,
-      })
-    }
+      const nominationId = approval.payload?.nomination_id
 
+      if (!nominationId) {
+  return NextResponse.json(
+    { error: "Nomination ID missing in payload" },
+    { status: 400 }
+  )
+}
+
+  /* ---------- AUDIT LOG ---------- */
+  await supabaseAdmin.from("audit_logs").insert({
+    action: "REJECT_NOMINATION_DECISION",
+    entity_type: "NOMINATION",
+    entity_id: nominationId,
+    performed_by: user.id,
+  })
+
+  /* ---------- DELETE NOMINATION ---------- */
+  if (nominationId) {
+    const { error: deleteError } = await supabaseAdmin
+      .from("nominations")
+      .delete()
+      .eq("id", nominationId)
+
+    if (deleteError) {
+      console.error("Failed to delete nomination:", deleteError)
+      throw deleteError
+    }
+  }}
     /* ---------- CASE 4: PUBLISH RESULTS ---------- */
     else if (approval.action_type === "PUBLISH_RESULTS") {
       await supabaseAdmin.from("audit_logs").insert({

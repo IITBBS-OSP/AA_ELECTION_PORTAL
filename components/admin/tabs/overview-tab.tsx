@@ -879,6 +879,7 @@ useEffect(() => {
 )
 
   setEditPhaseDates(election.phases ?? [])
+
 }, [election])
 
 
@@ -1355,7 +1356,7 @@ if (isEditPending && userRole === "observer") {
           </div>
 
           {/* Voter List Display */}
-          <div className="rounded-lg border border-border bg-card p-6">
+          {/* <div className="rounded-lg border border-border bg-card p-6">
             <h3 className="mb-4 text-lg font-semibold text-foreground">Eligible Voters</h3>
             {voterListFile ? (
               <div className="rounded-md border border-border bg-secondary/30 p-4">
@@ -1366,7 +1367,7 @@ if (isEditPending && userRole === "observer") {
             ) : (
               <p className="text-sm text-muted-foreground">No voter list uploaded</p>
             )}
-          </div>
+          </div> */}
         </div>
       )}
 
@@ -1434,7 +1435,7 @@ if (isEditPending && userRole === "observer") {
                   onChange={handleVoterListUpload}
                   className="hidden"
                 />
-                <span className="text-xs text-muted-foreground">CSV or Excel file</span>
+                <span className="text-xs text-muted-foreground">CSV file</span>
               </label>
               {editVoterListFile && (
                 <p className="mt-3 text-xs font-medium text-primary">File selected: {editVoterListFile.name}</p>

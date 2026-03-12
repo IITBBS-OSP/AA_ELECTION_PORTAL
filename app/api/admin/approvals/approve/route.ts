@@ -92,27 +92,27 @@ console.log("Approval Request ID:", approvalRequestId)
         .eq("id", approval.election_id)
 
       // Replace positions
-      await supabaseAdmin
-        .from("positions")
-        .delete()
-        .eq("election_id", approval.election_id)
+//       await supabaseAdmin
+//         .from("positions")
+//         .delete()
+//         .eq("election_id", approval.election_id)
 
-    const { data, error } = await supabaseAdmin
-  .from("positions")
-  .insert(
-    positions.map((p: any) => ({
-      election_id: approval.election_id,
-      name: p.name,
-      allow_multiple: Boolean(p.allow_multiple),
-      max_selections: p.allow_multiple
-        ? p.max_selections ??2
-        : null,
-    }))
-  )
-  .select()
+//     const { data, error } = await supabaseAdmin
+//   .from("positions")
+//   .insert(
+//     positions.map((p: any) => ({
+//       election_id: approval.election_id,
+//       name: p.name,
+//       allow_multiple: Boolean(p.allow_multiple),
+//       max_selections: p.allow_multiple
+//         ? p.max_selections ??2
+//         : null,
+//     }))
+//   )
+//   .select()
 
-console.log("INSERT POSITIONS DATA:", data)
-console.log("INSERT POSITIONS ERROR:", error)
+// console.log("INSERT POSITIONS DATA:", data)
+// console.log("INSERT POSITIONS ERROR:", error)
 
 
 

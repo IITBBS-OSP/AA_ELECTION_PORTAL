@@ -23,12 +23,37 @@ export interface Election {
 
 
 
-export default function AdminDashboard() {
+export default  function  AdminDashboard() {
 
 const [recentElections, setRecentElections] = useState<Election[]>([]);
 const [ongoingElections, setOngoingElections] = useState<Election[]>([]);
 const [pastElections, setPastElections] = useState<Election[]>  ([]);
 const [loading, setLoading] = useState(true);
+const [role, setRole] = useState<string>('ADMIN');
+
+
+
+useEffect(() => {
+  const fetchUserRole = async () => {
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) return
+
+    const { data } = await supabase
+      .from("users")
+      .select("role")
+      .eq("id", user.id)
+      .single()
+
+    setRole(data?.role)
+
+    console.log("User role:", role)
+  }
+
+  fetchUserRole()
+}, [])
+
+
 
 
 useEffect(() => {
@@ -119,19 +144,29 @@ const HandleLogout = async () => {
       <div className="mx-auto max-w-6xl">
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Admin Dashboard</h1>
+            <h1 className="md:text-3xl text-xl font-semibold md:font-bold text-foreground">{role === 'ADMIN' ? 'Admin' : 'Observer'} Dashboard</h1>
             <p className="mt-2 text-muted-foreground">Manage elections and voting processes</p>
           </div>
           <div className="flex gap-2">
+          {role=== 'ADMIN' && (
             <Link
-            href="/admin/elections/create"
-            className="rounded-md bg-primary px-6 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity"
-          >
-            + Create Election
-          </Link>
-          <div className="rounded-md bg-primary px-6 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity">
+              href="/admin/elections/create"
+              className=" flex justify-center items-center rounded-md bg-primary p-2 md:px-6 md:py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity"
+            >
+              + Create Election
+            </Link>
+          )}
+          <div className="  flex justify-center rounded-md items-center p-2 bg-primary md:px-6 md:py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity">
             <button onClick={HandleLogout}>Logout</button>
           </div>
+
+           <Link
+              href="/admin/elections"
+              className=" flex justify-center items-center rounded-md bg-primary p-2 md:px-6 md:py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity"
+            >
+               Elections
+            </Link>
+          
 
 
           </div>

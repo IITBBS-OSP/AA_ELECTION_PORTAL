@@ -26,7 +26,7 @@ export default function DashboardHeader() {
           <div className="w-12 h-12 rounded-lg  flex items-center justify-center">
             {/* <span className="text-lg font-bold">AA</span>
              */}
-              <img src="logo.png" alt="IIT BBS Logo" />
+              <img src="/logo.png" alt="IIT BBS Logo" />
           </div>
           <div>
             <h1 className="font-bold text-lg">Alumni Association</h1>
