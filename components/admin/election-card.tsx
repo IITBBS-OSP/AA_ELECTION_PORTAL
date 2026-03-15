@@ -8,7 +8,7 @@ interface ElectionCardProps {
   created_at: string
   id: number
   positionCount: number
-  status: 'DRAFT' | 'NOMINATION' | 'VOTING' | 'RESULTS_PUBLISHED'
+  status: 'DRAFT' | 'NOMINATION' | 'VOTING' | 'RESULTS_PUBLISHED'| 'CLOSED'|'CAMPAIGN'
   title: string
 }
 
@@ -18,6 +18,8 @@ export function ElectionCard({ id, title, academic_year, status   , positionCoun
     NOMINATION: "bg-primary text-primary-foreground",
     VOTING: "bg-primary text-primary-foreground",
     RESULTS_PUBLISHED: "bg-secondary text-secondary-foreground",
+    CLOSED: "bg-destructive text-destructive-foreground",
+    CAMPAIGN: "bg-warning text-warning-foreground",
     Default: "bg-accent text-accent-foreground",
   }
 

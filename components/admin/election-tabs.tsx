@@ -237,8 +237,9 @@ import { NominationsTab } from "./tabs/nominations-tab"
 import { ResultsTab } from "./tabs/results-tab"
 import { AdminElectionDetailsResponse } from "@/app/admin/elections/[id]/page"
 import { supabase } from "@/lib/supabaseClient"
+import CampaignTab from "./tabs/screening"
 
-const tabs = ["Overview", "Control", "Nominations", "Results"] as const
+const tabs = ["Overview", "Control", "Nominations", "Results","Screening"] as const
 
 interface ElectionTabsProps {
   election: AdminElectionDetailsResponse | null
@@ -418,6 +419,14 @@ export function ElectionTabs({ election }: ElectionTabsProps) {
             refetchPendingApproval={fetchPendingApproval}
           />
         )}
+
+       {activeTab === "Screening" && (
+  electionStatus === "CAMPAIGN" ? (
+    <CampaignTab election={election?.election} />
+  ) : (
+    <TabBlockedMessage message="Screening tab will be available once the election enters the campaign phase." />
+  )
+)}
 
        {activeTab === "Nominations" && (
   electionStatus === "NOMINATION" ? (

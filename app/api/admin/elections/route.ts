@@ -57,7 +57,7 @@ export async function GET() {
 
       if (["CREATED", "DRAFT"].includes(election.status)) {
         created.push(enrichedElection)
-      } else if (["NOMINATION", "VOTING"].includes(election.status)) {
+      } else if (["NOMINATION", "VOTING", "CAMPAIGN"].includes(election.status)) {
         ongoing.push(enrichedElection)
       } else if (["CLOSED", "RESULTS_PUBLISHED"].includes(election.status)) {
         past.push(enrichedElection)

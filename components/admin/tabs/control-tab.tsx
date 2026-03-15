@@ -255,7 +255,7 @@ interface ControlTabProps {
   refetchPendingApproval: () => void
 }
 
-const phaseSequence = ["DRAFT", "NOMINATION", "VOTING", "CLOSED"] as const
+const phaseSequence = ["DRAFT", "NOMINATION", "VOTING","CAMPAIGN","CLOSED"] as const
 
 export function ControlTab({
   election,

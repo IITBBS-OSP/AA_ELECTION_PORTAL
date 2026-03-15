@@ -99,7 +99,7 @@ export default function ElectionsListPage() {
   console.log('All elections:', elections);
 
   const filteredElections = elections.filter((e) => {
-    if (filter === "active") return  e.status === "NOMINATION" || e.status === "VOTING"
+    if (filter === "active") return  e.status === "NOMINATION" || e.status === "VOTING"|| e.status === "CAMPAIGN"
   if (filter === "completed") return e.status === "RESULTS_PUBLISHED"
     return true
   })
@@ -109,6 +109,8 @@ export default function ElectionsListPage() {
     NOMINATION: "bg-primary text-primary-foreground",
     VOTING: "bg-primary text-primary-foreground",
     RESULTS_PUBLISHED: "bg-secondary text-secondary-foreground",
+    CLOSED: "bg-destructive text-destructive-foreground",
+    CAMPAIGN: "bg-warning text-warning-foreground",
   }
 
   return (

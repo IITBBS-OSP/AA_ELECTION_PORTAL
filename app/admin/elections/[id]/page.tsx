@@ -26,6 +26,7 @@ export interface ElectionCore {
     | "CREATED"
     | "DRAFT"
     | "NOMINATION"
+    | "CAMPAIGN"
     | "VOTING"
     | "CLOSED"
     | "RESULTS_PUBLISHED"

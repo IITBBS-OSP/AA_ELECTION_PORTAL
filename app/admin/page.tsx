@@ -14,7 +14,7 @@ export interface Election {
   created_at: string
   id: number
   positionCount: number
-   status: 'DRAFT' | 'NOMINATION' | 'VOTING' | 'RESULTS_PUBLISHED'
+   status: 'DRAFT' | 'NOMINATION' | 'VOTING' | 'RESULTS_PUBLISHED'| 'CLOSED'|'CAMPAIGN'
   title: string
 }
 
