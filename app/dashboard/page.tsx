@@ -68,7 +68,7 @@ import { CenteredLoader } from "@/components/ui/loader"
 export interface ElectionDetails {
   id: number
   title: string
-  status: "DRAFT" | "ACTIVE" | "COMPLETED" | "NOMINATION" | "VOTING"| "RESULTS_PUBLISHED"
+  status: "DRAFT" | "ACTIVE" | "COMPLETED" | "NOMINATION" | "VOTING"| "RESULTS_PUBLISHED"|"CAMPAIGN"
   created_at: string
   description: string
   academic_year: string
@@ -92,7 +92,7 @@ export default function DashboardPage() {
       console.log("Fetched elections:", elections)
 
       const ongoing = elections.filter(e =>
-        ["NOMINATION", "VOTING", "ACTIVE","DRAFT"].includes(e.status)
+        ["NOMINATION", "VOTING", "ACTIVE","DRAFT","CAMPAIGN"].includes(e.status)
       )
 
       const past = elections.filter(e => e.status === "RESULTS_PUBLISHED")
