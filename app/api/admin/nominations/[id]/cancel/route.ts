@@ -1,12 +1,41 @@
 import { NextResponse } from "next/server"
 import { supabaseAdmin } from "@/lib/supabaseAdmin"
 import { sendMail } from "@/lib/mailer"
+import { getSupabaseServerClient } from "@/lib/supabaseServer"
+
 
 export async function PATCH(
   req: Request,
   context: { params: Promise<{ id: string }> }
 ) {
   try {
+    /* =========================
+       AUTHORIZATION CHECK
+    ========================= */
+
+   const supabase = await getSupabaseServerClient()
+       const {
+         data: { user },
+       } = await supabase.auth.getUser()
+   
+       if (!user) {
+         return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+       }
+   
+       const { data: profile } = await supabase
+         .from("users")
+         .select("role")
+         .eq("id", user.id)
+         .single()
+   
+       if (!profile || profile.role !== "OBSERVER" && profile.role !== "ADMIN") {
+         return NextResponse.json({ error: "Forbidden" }, { status: 403 })
+       }
+   
+    /* =========================
+       GET NOMINATION ID
+    ========================= */
+
     const { id: nominationId } = await context.params
 
     if (!nominationId) {
@@ -79,6 +108,7 @@ export async function PATCH(
       .update({
         status: "REJECTED",
         workflow_status: "FAILED",
+        reviewed_by: user.id
       })
       .eq("id", nominationId)
 
