@@ -35,7 +35,7 @@ export default function ElectionCard({ election }: { election: ElectionDetails }
           <Badge
             className={`badge ${statusBadgeColor} shrink-0 rounded-md px-2 py-0.5 text-xs`}
           >
-            {election.status === "NOMINATION" || election.status === "VOTING" ? "Active" : "Upcoming"}
+            {election.status === "NOMINATION" || election.status === "VOTING"||election.status==="CAMPAIGN" ? "Active" : election.status === "RESULTS_PUBLISHED" ? "Completed" : "Upcoming"}
           </Badge>
         </div>
       </CardHeader>
@@ -49,7 +49,7 @@ export default function ElectionCard({ election }: { election: ElectionDetails }
         </div>
 
         <div className="flex justify-end pt-2">
-          <Link href={election.status === "NOMINATION" || election.status === "DRAFT" ? `/election/${election.id}` : election.status === "VOTING" ? `/vote/${election.id}` : `/election/${election.id}/result`}>
+          <Link href={election.status === "NOMINATION" || election.status === "DRAFT"||election.status==="CAMPAIGN" ? `/election/${election.id}` : election.status === "VOTING" ? `/vote/${election.id}` : `/election/${election.id}/result`}>
             <Button
               size="sm"
               variant={election.status === "NOMINATION" || election.status === "VOTING" ? "default" : "outline"}
