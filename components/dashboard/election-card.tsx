@@ -54,7 +54,7 @@ export default function ElectionCard({ election }: { election: ElectionDetails }
               size="sm"
               variant={election.status === "NOMINATION" || election.status === "VOTING" ? "default" : "outline"}
             >
-              {election.results_published ? "View Results" : election.status === "COMPLETED" ? "Results Pending" :election.status==="NOMINATION" ? "Participate Now" : election.status==="DRAFT" ? "View Details":election.status==="VOTING" ? "Vote Now":"-"}
+              {election.results_published ? "View Results" : election.status === "COMPLETED" ? "Results Pending" :election.status==="NOMINATION" ? "Participate Now" : election.status==="DRAFT" ? "View Details":election.status==="VOTING" ? "Vote Now":election.status==="CAMPAIGN" ? "View Details" : "-"}
             </Button>
           </Link>
         </div>
